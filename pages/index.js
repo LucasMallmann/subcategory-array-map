@@ -1,7 +1,56 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from 'next/head';
+import { useEffect, useMemo, useState } from 'react';
+
+import api from '../services/api';
+
+import styles from '../styles/Home.module.css';
 
 export default function Home() {
+  const [groups, setGroups] = useState();
+  const [items, setItems] = useState();
+  const [groupedItems, setGroupedItems] = useState();
+
+  useEffect(() => {
+    async function loadGroups() {
+      const response = await api.get('/grupos');
+      setGroups(response.data);
+    }
+
+    async function loadItems() {
+      const response = await api.get('/itens');
+      setItems(response.data);
+    }
+
+    loadGroups();
+    loadItems();
+  }, []);
+
+  useEffect(() => {
+    if (!groups || !items) {
+      return;
+    }
+
+    const groupedItems = items.reduce((result, currentValue) => {
+      const group = groups.find((g) => {
+        return g.codigo === currentValue['grupo'];
+      });
+
+      if (!result[group?.descricao]) {
+        result[group?.descricao] = [];
+      }
+
+      result[group?.descricao].push(currentValue);
+
+      return result;
+    }, {});
+
+    setGroupedItems(groupedItems);
+  }, [groups, items]);
+
+  const keys = useMemo(() => groupedItems && Object.keys(groupedItems), [
+    groupedItems,
+  ]);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -10,56 +59,31 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <h1>Grupos</h1>
+        <ul>
+          {groups?.map((group) => (
+            <li key={group.codigo}>{group.descricao}</li>
+          ))}
+        </ul>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+        <hr />
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+        <h3>Separar por categoria</h3>
+        {keys && (
+          <ul>
+            {keys.map((key) => {
+              const item = groupedItems[key];
+              return item.map((item) => (
+                <>
+                  <li key={Math.random().toString()}>
+                    {item.descricao + ' - ' + key}
+                  </li>
+                </>
+              ));
+            })}
+          </ul>
+        )}
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
     </div>
-  )
+  );
 }

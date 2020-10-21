@@ -1,0 +1,62 @@
+{
+    "grupos": [
+      {
+        "codigo": "c3e5901f-d9ba-48f3-bead-5b31538af3d5",
+        "descricao": "PIZZAS",
+        "subgrupos": [
+          {
+            "codigo": "9815fbbd-a12c-4425-9b0e-9e8632715112",
+            "descricao": "PEQUENAS"
+          },
+          {
+            "codigo": "2895c89f-1a25-432d-97a6-19ec4f692561",
+            "descricao": "MEDIAS"
+          },
+          {
+            "codigo": "865dd646-26dd-4662-a3e5-9795d48ac250",
+            "descricao": "GRANDES"
+          }
+        ]
+      },
+      {
+        "codigo": "717672cd-44f6-4d42-9e55-8ec746a5c518",
+        "descricao": "LANCHES"
+      }
+    ],
+  
+    "itens": [
+      {
+        "codigo": "8a12abed-8218-40c4-bc39-f21dc72b39a5",
+        "descricao": "X bacon",
+        "complementoDescricao": "Hamburger 100 g salada bacon queijo.",
+        "valorVenda": 26.0,
+        "imagem": "https://imagensemoldes.com.br/wp-content/uploads/2020/03/X-Burguer-PNG-1200x1217.png",
+        "grupo": "717672cd-44f6-4d42-9e55-8ec746a5c518",
+        "subgrupo": "c461c2fb-31e5-4258-8774-6e49ec737af0",
+        "dataInicialPromocao": "2020-01-02",
+        "dataFinalPromocao": "2020-01-31",
+        "valorPromocional": 19.5,
+        "ingredientesItens": ["CEBOLA", "QUEIJO", "ALFACE"]
+      },
+      {
+        "codigo": "e729b58b-7d8a-4fcb-a246-cf0b49b9510a",
+        "descricao": "Ao Molho",
+        "complementoDescricao": "Pizza com molho branco, fughi e cheiro verde das montanhas.",
+        "valorVenda": 15.0,
+        "imagem": "https://www.fugini.com.br/assets/uploads/receitas/medalhoes-ao-molho-madeira-fugini-wntJ.png",
+        "grupo": "c3e5901f-d9ba-48f3-bead-5b31538af3d5",
+        "subgrupo": "2895c89f-1a25-432d-97a6-19ec4f692561",
+        "ingredientesItens": ["CEBOLA", "QUEIJO", "ALFACE"]
+      },
+      {
+        "codigo": "e729b58b-7d8a-4fcb-a246-cf0b49b9510a",
+        "descricao": "Ao Molho",
+        "complementoDescricao": "Pizza com molho branco, fughi e cheiro verde das montanhas.",
+        "valorVenda": 15.0,
+        "imagem": "https://www.fugini.com.br/assets/uploads/receitas/medalhoes-ao-molho-madeira-fugini-wntJ.png",
+        "grupo": "c3e5901f-d9ba-48f3-bead-5b31538af3d5",
+        "subgrupo": "2895c89f-1a25-432d-97a6-19ec4f692561",
+        "ingredientesItens": ["CEBOLA", "QUEIJO", "ALFACE"]
+      }
+    ]
+  }
